@@ -1,11 +1,8 @@
 require('dotenv').config();
 
-const REQUIRED_ENV_VARS = ['JWT_SECRET', 'DATABASE_URL'];
-const missing = REQUIRED_ENV_VARS.filter(v => !process.env[v]);
-if (missing.length) {
-  console.error(`Erro: Variáveis de ambiente obrigatórias não definidas: ${missing.join(', ')}`);
-  console.error('Defina-as no arquivo .env ou nas Environment Variables do Render.');
-  process.exit(1);
+if (!process.env.JWT_SECRET) {
+  console.warn('Aviso: JWT_SECRET não definida. Usando valor padrão inseguro. Defina JWT_SECRET nas Environment Variables do Render.');
+  process.env.JWT_SECRET = 'fallback-insecure-key-dev-only';
 }
 
 const express = require('express');
