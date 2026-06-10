@@ -4,11 +4,10 @@ services:
     env: node
     buildCommand: npm install
     startCommand: npm start
+    nodeVersion: 20
     envVars:
       - key: PORT
         value: 3005
-      - key: NODE_VERSION
-        value: 20
       - key: JWT_SECRET
         generateValue: true
       - key: JWT_EXPIRES_IN

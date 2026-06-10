@@ -13,10 +13,10 @@ async function seed() {
     await User.create({
       name: 'Super Admin',
       email: 'gelsonganga82@gmail.com',
-      password: 'Gelson123',
+      password: hashed,
       role: 'superadmin',
     });
-    console.log('Superadmin criado: gelsonganga82@gmail.com / Gelson123');
+    console.log('Superadmin criado: gelsonganga82@gmail.com / admin123');
   } else {
     console.log('Já existem usuários no banco. Seed ignorado.');
   }
