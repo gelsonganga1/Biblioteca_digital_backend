@@ -27,6 +27,26 @@ app.use('/api/departments', departmentRoutes);
 app.use('/api/services', serviceRoutes);
 app.use('/api/appointments', appointmentRoutes);
 
+/**
+ * @openapi
+ * /api/health:
+ *   get:
+ *     tags: [Health]
+ *     summary: Verificar status da API
+ *     description: Endpoint de saúde para monitoramento.
+ *     security: []
+ *     responses:
+ *       200:
+ *         description: API saudável
+ *         content:
+ *           application/json:
+ *             schema:
+ *               type: object
+ *               properties:
+ *                 status:
+ *                   type: string
+ *                   example: ok
+ */
 app.get('/api/health', (req, res) => res.json({ status: 'ok' }));
 
 sequelize.sync({ alter: false })

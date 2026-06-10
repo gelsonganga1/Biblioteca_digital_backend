@@ -1,4 +1,5 @@
 const { Appointment, User, Service, Department } = require('../models');
+const { sendAppointmentConfirmation } = require('../services/smsService');
 
 const isDashboard = (user) => user.role === 'superadmin' || user.role === 'admin';
 
@@ -60,6 +61,15 @@ exports.create = async (req, res) => {
     };
 
     const appointment = await Appointment.create(data);
+
+    const user = await User.findByPk(appointment.user_id);
+    if (user && user.phone) {
+      const service = await Service.findByPk(appointment.service_id);
+      const department = await Department.findByPk(appointment.department_id);
+      sendAppointmentConfirmation(appointment, user, service, department)
+        .catch(err => console.error('SMS falhou:', err.message));
+    }
+
     res.status(201).json(appointment);
   } catch (error) {
     res.status(500).json({ error: error.message });

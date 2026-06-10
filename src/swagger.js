@@ -14,7 +14,7 @@ const swaggerSpec = swaggerJsdoc({
     },
     servers: [
       {
-        url: 'https://agendamento-api.onrender.com',
+        url: 'https://biblioteca-digital-backend-2.onrender.com',
         description: 'Produção (Render)',
       },
       {
@@ -27,6 +27,7 @@ const swaggerSpec = swaggerJsdoc({
       { name: 'Departamentos', description: 'Gestão de departamentos/repartições' },
       { name: 'Serviços', description: 'Gestão de serviços oferecidos' },
       { name: 'Agendamentos', description: 'Criação e gestão de agendamentos' },
+      { name: 'Health', description: 'Monitoramento da API' },
     ],
     components: {
       securitySchemes: {
@@ -177,23 +178,12 @@ const swaggerSpec = swaggerJsdoc({
             role: { type: 'string', enum: ['superadmin', 'admin', 'client'], example: 'admin' },
           },
         },
-        AppointmentList: {
-          type: 'object',
-          properties: {
-            total: { type: 'integer', example: 1 },
-            page: { type: 'integer', example: 1 },
-            totalPages: { type: 'integer', example: 1 },
-            data: {
-              type: 'array',
-              items: { $ref: '#/components/schemas/Appointment' },
-            },
-          },
-        },
+
       },
     },
     security: [{ bearerAuth: [] }],
   },
-  apis: ['./src/routes/*.js'],
+  apis: ['./src/routes/*.js', './src/server.js'],
 });
 
 module.exports = swaggerSpec;

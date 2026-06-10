@@ -18,6 +18,10 @@ services:
         fromDatabase:
           name: agendamento-db
           property: connectionString
+      - key: OMBALA_API_TOKEN
+        sync: false
+      - key: OMBALA_SENDER
+        sync: false
 
 databases:
   - name: agendamento-db
