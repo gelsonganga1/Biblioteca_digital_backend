@@ -1,4 +1,13 @@
 require('dotenv').config();
+
+const REQUIRED_ENV_VARS = ['JWT_SECRET', 'DATABASE_URL'];
+const missing = REQUIRED_ENV_VARS.filter(v => !process.env[v]);
+if (missing.length) {
+  console.error(`Erro: Variáveis de ambiente obrigatórias não definidas: ${missing.join(', ')}`);
+  console.error('Defina-as no arquivo .env ou nas Environment Variables do Render.');
+  process.exit(1);
+}
+
 const express = require('express');
 const cors = require('cors');
 const swaggerUi = require('swagger-ui-express');
