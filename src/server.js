@@ -4,6 +4,14 @@ if (!process.env.JWT_SECRET) {
   console.warn('Aviso: JWT_SECRET não definida. Usando valor padrão inseguro. Defina JWT_SECRET nas Environment Variables do Render.');
   process.env.JWT_SECRET = 'fallback-insecure-key-dev-only';
 }
+if (!process.env.JWT_EXPIRES_IN) {
+  console.warn('Aviso: JWT_EXPIRES_IN não definida. Usando valor padrão 1d.');
+  process.env.JWT_EXPIRES_IN = '1d';
+}
+if (!process.env.JWT_REFRESH_EXPIRES_IN) {
+  console.warn('Aviso: JWT_REFRESH_EXPIRES_IN não definida. Usando valor padrão 7d.');
+  process.env.JWT_REFRESH_EXPIRES_IN = '7d';
+}
 
 const express = require('express');
 const cors = require('cors');
