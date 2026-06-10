@@ -1,0 +1,36 @@
+{
+  "name": "biblioteca_digital_backend",
+  "version": "1.0.0",
+  "description": "API de agendamento de serviços públicos e privados",
+  "main": "src/server.js",
+  "scripts": {
+    "start": "node src/server.js",
+    "dev": "node --watch src/server.js",
+    "seed": "node seed.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/gelsonganga1/Biblioteca_digital_backend.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "type": "commonjs",
+  "bugs": {
+    "url": "https://github.com/gelsonganga1/Biblioteca_digital_backend/issues"
+  },
+  "homepage": "https://github.com/gelsonganga1/Biblioteca_digital_backend#readme",
+  "dependencies": {
+    "bcryptjs": "^3.0.3",
+    "cors": "^2.8.6",
+    "dotenv": "^17.4.2",
+    "express": "^5.2.1",
+    "jsonwebtoken": "^9.0.3",
+    "multer": "^2.1.1",
+    "pg": "^8.21.0",
+    "sequelize": "^6.37.8",
+    "sqlite3": "^6.0.1",
+    "swagger-jsdoc": "^6.3.0",
+    "swagger-ui-express": "^5.0.1"
+  }
+}
