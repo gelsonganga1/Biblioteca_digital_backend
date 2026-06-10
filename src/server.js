@@ -4,6 +4,7 @@ const cors = require('cors');
 const swaggerUi = require('swagger-ui-express');
 const swaggerSpec = require('./swagger');
 const sequelize = require('./config/database');
+const seed = require('../seed');
 require('./models');
 
 const userRoutes = require('./routes/userRoutes');
@@ -28,9 +29,16 @@ app.use('/api/appointments', appointmentRoutes);
 
 app.get('/api/health', (req, res) => res.json({ status: 'ok' }));
 
-sequelize.sync().then(() => {
-  app.listen(PORT, () => {
-    console.log(`Servidor rodando na porta ${PORT}`);
-    console.log(`Swagger: http://localhost:${PORT}/api/docs`);
+sequelize.sync({ alter: false })
+  .then(async () => {
+    await seed();
+    app.listen(PORT, () => {
+      console.log(`Servidor rodando na porta ${PORT}`);
+      console.log(`Swagger: http://localhost:${PORT}/api/docs`);
+    });
+  })
+  .catch((err) => {
+    console.error('Erro ao conectar ao banco de dados:', err.message);
+    console.error(err.stack);
+    process.exit(1);
   });
-});

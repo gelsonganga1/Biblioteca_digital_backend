@@ -1,11 +1,9 @@
 require('dotenv').config();
 const bcrypt = require('bcryptjs');
-const sequelize = require('./config/database');
-const { User } = require('./models');
+const sequelize = require('./src/config/database');
+const { User } = require('./src/models');
 
 async function seed() {
-  await sequelize.sync();
-
   const count = await User.count();
 
   if (count === 0) {
@@ -18,13 +16,15 @@ async function seed() {
     });
     console.log('Superadmin criado: gelsonganga82@gmail.com / admin123');
   } else {
-    console.log('Já existem usuários no banco. Seed ignorado.');
+    console.log(`${count} usuário(s) encontrado(s). Seed ignorado.`);
   }
-
-  await sequelize.close();
 }
 
-seed().catch((err) => {
-  console.error('Erro no seed:', err);
-  process.exit(1);
-});
+if (require.main === module) {
+  sequelize.sync().then(seed).then(() => sequelize.close()).catch((err) => {
+    console.error('Erro no seed:', err);
+    process.exit(1);
+  });
+}
+
+module.exports = seed;
